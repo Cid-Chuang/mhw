@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<springProfile name="dev, dev-noverify">
+		<logger name="org.springframework.web" level="INFO"/>
+	</springProfile>
+    
+	<springProfile name="beta, prod">
+		<logger name="org.springframework.web" level="INFO"/>
+	</springProfile>
+	
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+	</root>
+       
+</configuration>

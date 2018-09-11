@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration 
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 
+	連結到 localhost 開發資料庫
+	必須使用 mybatis-generator-core-1.3.5.1.jar 來產生 mapper.xml
+ -->
+<generatorConfiguration>
+	<!-- 指定 mysql connection jar -->
+	<classPathEntry location="./postgresql-9.1-901-1.jdbc4.jar" />
+	<classPathEntry location="./CustomMyBatisGenerator.jar"/>
+	
+	<context id="mhwTable" targetRuntime="MyBatis3">
+		<!-- plugin -->
+		<!-- 支援 RowBounds 分頁 -->
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+		<!-- 讓 entity 都實作 Serializable -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+			<property name="suppressJavaInterface" value="False" />
+  		</plugin>
+  		<!-- 讓 entity 都實作 toString -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+  		<!-- 讓 entity set method 支援 fluent 寫法 e.g. new User().withName('XYZ').withEmail('bbb') -->
+		<plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin" />
+  
+  		<!-- 去除註解  -->
+  		<commentGenerator>
+  			<property name="addRemarkComments" value="true" />
+  			<property name="suppressDate" value="true" />
+  		</commentGenerator>
+  
+  		<!-- 指定 JDBC 連線 -->
+  		<jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/mhw" 
+	   		driverClass="org.postgresql.Driver" 
+	    		userId="postgres" password="root"/>
+
+		<!-- 指定 Java Type -->
+		<javaTypeResolver >
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>  
+    
+		<!-- Java Entity -->
+		<javaModelGenerator targetPackage="com.riease.gamer.mhw.entity" 
+		    	targetProject="../src/main/java">
+		    	<property name="rootClass" value="com.riease.gamer.mhw.model.Entity" />
+		    	<property name="enableSubPackages" value="true" />
+		    	<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+    
+		<!-- Sql Mapper  -->
+		<sqlMapGenerator targetPackage="com.riease.gamer.mhw.mapper" 
+			targetProject="../src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+    
+		<!-- Java Mapper class -->
+		<javaClientGenerator targetPackage="com.riease.gamer.mhw.mapper" 
+	    		targetProject="../src/main/java" 
+	    		type="XMLMAPPER">
+	    		<property name="enableSubPackages" value="true"/>
+	    	</javaClientGenerator>
+    
+		<!-- 要產生的 table 
+		-->
+		<table schema="mhw" tableName="jewel">
+		</table>
+		
+		<table schema="mhw" tableName="alchemy_record">
+		</table>
+		
+	</context>
+	
+</generatorConfiguration>
