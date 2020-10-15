@@ -21,6 +21,10 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+		name = 'Manni Wood'
+		url = 'http://dl.bintray.com/manniwood/maven'
+	}
 }
 
 configurations {
